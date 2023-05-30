@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  test_install_phylum_job:
+    runs-on: ubuntu-latest
+    name: A job to test phylum
+    steps:
+      - uses: actions/checkout@v2
+      - id: phylum-test
+        uses: phylum-dev/install-phylum-latest-action@v1
+        with:
+          phylum_token: ${{ secrets.PHYLUM_TOKEN }}
+
+      - name: Run phylum to test auth with token
+        shell: bash
+        run: |
+          phylum project
